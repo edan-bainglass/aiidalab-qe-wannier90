@@ -102,9 +102,6 @@ class ConfigurationSettingPanel(
             value=self._model.scan_pdwf_parameter,
             description='Optimize PDWF thresholds',
             indent=False,
-            tooltip='If enabled, an exhaustive scan of the PDWF thresholds is '
-            'performed (up to 30 Wannierizations) to find those that bring the '
-            'bands distance (for bands up to 2 eV above the Fermi level) below 10 meV.',
         )
         ipw.link(
             (self._model, 'scan_pdwf_parameter'),
@@ -357,6 +354,15 @@ class ConfigurationSettingPanel(
             layout=ipw.Layout(width='100%', align_items='flex-start', overflow='visible'),
         )
 
+        optimize_pdwf_info = ipw.HTML(
+            """<div class="alert alert-warning">
+                <b>Note:</b> If <b>Optimize PDWF thresholds</b> is enabled, an
+                exhaustive scan of the PDWF thresholds is performed (up to 30
+                Wannierizations) to find those that bring the bands distance (for
+                bands up to 2 eV above the Fermi level) below 10 meV.
+            </div>"""
+        )
+
         self.children = [
             self.error_message,
             self.warning_message,
@@ -373,6 +379,7 @@ class ConfigurationSettingPanel(
             self.warning_message_pdwf,
             self.frozen_states_widget,
             self.scan_pdwf_parameter,
+            optimize_pdwf_info,
         ]
 
         self.rendered = True
