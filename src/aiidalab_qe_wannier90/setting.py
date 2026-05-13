@@ -384,7 +384,15 @@ class ConfigurationSettingPanel(
 
         self.rendered = True
 
+        self._toggle_insulator_warning()
+        self._toggle_energy_window_input()
+        self._toggle_fermi_surface_parameters()
+        self._toggle_dhva_freqs_parameters()
+
     def _on_electronic_type_change(self, _):
+        self._toggle_insulator_warning()
+
+    def _toggle_insulator_warning(self):
         if not self.rendered:
             return
 
@@ -400,8 +408,10 @@ class ConfigurationSettingPanel(
         else:
             self.error_message.value = ''
 
-    # Function to toggle the visibility of the energy window input
     def _on_frozen_type_change(self, _):
+        self._toggle_energy_window_input()
+
+    def _toggle_energy_window_input(self):
         if not self.rendered:
             return
 
@@ -411,6 +421,9 @@ class ConfigurationSettingPanel(
             self.energy_window_widget.layout.display = 'none'
 
     def _on_compute_fermi_surface_change(self, change):
+        self._toggle_fermi_surface_parameters()
+
+    def _toggle_fermi_surface_parameters(self):
         if not self.rendered:
             return
 
@@ -424,6 +437,9 @@ class ConfigurationSettingPanel(
             self.params_fermi_surface_vbox.children = []
 
     def _on_compute_dhva_freqs_change(self, _):
+        self._toggle_dhva_freqs_parameters()
+
+    def _toggle_dhva_freqs_parameters(self):
         if not self.rendered:
             return
 
